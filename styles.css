@@ -67,6 +67,7 @@ body {
         margin-right: 0;
     }
 }
+
 .contact-info__header,
 .contact-info__sub-header {
     text-align: center;
@@ -129,6 +130,7 @@ body {
     border: 3px solid;
     border-color: var(--text-decoration-color);
 }
+
 .intro {
     display: flex;
     justify-content: start;
@@ -165,6 +167,7 @@ body {
     color: var(--secondary-text-color);
     text-align: justify;
 }
+
 .experiences {
     flex: 1 1 60%;
     margin-right: 50px;

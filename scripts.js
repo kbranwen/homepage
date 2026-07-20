@@ -86,6 +86,20 @@ function toggleMode() {
   if (photo) {
     photo.src = isDetective ? "assets/avatar-detective.jpg" : "assets/avatar.jpg";
   }
+
+    // 📄 🔒 ПІДМІНА ФАЙЛУ ЗАВАНТАЖЕННЯ (HR vs SCP)
+const pdfBtn = document.getElementById("btn-pdf");
+  if (pdfBtn) {
+    if (isDetective) {
+      pdfBtn.setAttribute("href", "assets/Clasified-resume.pdf");
+      pdfBtn.setAttribute("download", "Clasified_resume_RESTRICTED.pdf");
+      pdfBtn.innerText = "🛑 [CLASSIFIED] SCP DOSSIER (PDF)";
+    } else {
+      pdfBtn.setAttribute("href", "assets/Resume.pdf");
+      pdfBtn.setAttribute("download", "CV_QA_Engineer.pdf");
+      pdfBtn.innerText = "📄 Завантажити CV (PDF)";
+    }
+  }
     
   document.getElementById("user-name").innerText = isDetective
     ? "ДОСЬЄ №028 // CLASSIFIED"
@@ -178,6 +192,7 @@ function handleContactClick(event) {
   }
 }
 
+ 
 // 3. Знищення доказів (Величезний світло-сірий заголовок)
 function destroyEvidence() {
     if (confirm("Ви впевнені, що хочете видалити всі докази?")) {

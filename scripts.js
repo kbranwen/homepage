@@ -97,7 +97,11 @@ function toggleMode() {
   document.body.classList.toggle("detective-mode");
 
   const isDetective = document.body.classList.contains("detective-mode");
-
+    document.title = isDetective 
+    
+  ? "🚨 CASE #028 // RESTRICTED ACCESS" 
+        : "Résumé";
+    
   // 🌧️ Керування дощем
   if (isDetective) {
     if (!rainInterval) {

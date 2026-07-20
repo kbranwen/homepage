@@ -7,162 +7,245 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
   <body>
-    ― Hello World! &#x1F609;
-    <main>
-      <div class="resume">
-        <div class="container">
-          <div class="resume__block">
-            <h1 class="contact-info__header">Alex Johnson</h1>
-            <h3 class="contact-info__sub-header">Full-Stack Developer</h3>
+    <!-- Ефект дощу, який видно ТІЛЬКИ в режимі детектива -->
+    <div class="rain-overlay"></div>
 
-            <div class="contact_info_container fh">
-              <div class="contact-info__block"></div>
-
-              <div class="contact-info__block contact-info__block--center">
-                <img
-                  class="contact-info__avatar"
-                  src="assets/avatar.png"
-                  alt="Avatar"
-                />
-              </div>
-
-              <div class="contact-info__block"></div>
-            </div>
-          </div>
-        </div>
+    <header class="main-header">
+      <div class="toggle-container">
+        <span class="toggle-label label-hr">👔 HR Mode</span>
+        <label class="switch">
+          <input type="checkbox" id="mode-toggle" onchange="toggleMode()" />
+          <span class="slider round"></span>
+        </label>
+        <span class="toggle-label label-detective">🕵️‍♀️ Detective Mode</span>
       </div>
 
-      <div class="container">
-        <div class="resume__block">
-          <div class="intro">
-            <div class="intro__icon-wrapper">
-              <svg
-                class="intro__icon"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 512 512"
-              >
-                <path
-                  d="M464 256h-80v-64c0-35.3 28.7-64 64-64h8c13.3 0 24-10.7
-            24-24V56c0-13.3-10.7-24-24-24h-8c-88.4 0-160 71.6-160 160v240c0
-            26.5 21.5 48 48 48h128c26.5 0 48-21.5
-            48-48V304c0-26.5-21.5-48-48-48zm-288 0H96v-64c0-35.3 28.7-64
-            64-64h8c13.3 0 24-10.7 24-24V56c0-13.3-10.7-24-24-24h-8C71.6
-            32 0 103.6 0 192v240c0 26.5 21.5 48 48 48h128c26.5 0 48-21.5
-            48-48V304c0-26.5-21.5-48-48-48z"
-                ></path>
-              </svg>
-            </div>
-            <p class="intro_text">
-              I'm John, a software developer driven by innovation and
-              problem-solving. With a strong background in computer science, I'm
-              dedicated to pushing boundaries and crafting elegant solutions
-              through code.
+      <div class="header-banner">
+        <h1 id="user-name">TETIANA TOLKACHOVA</h1>
+        <h2 id="page-title">JUNIOR MANUAL QA ENGINEER</h2>
+      </div>
+    </header>
+
+    <main class="resume-container">
+      <h2 id="section-main-title" class="section-title">
+        📌 РЕЗЮМЕ / ПРОФЕСІЙНИЙ ПРОФІЛЬ
+      </h2>
+      <div class="grid-row">
+        <section id="summary" class="card">
+          <h3 class="card-title" id="title-summary">👤 ІНФОРМАЦІЯ ПРО МЕНЕ</h3>
+          <div class="card-content">
+            <img
+              src="assets/avatar.png"
+              alt="Tetiana Tolkachova"
+              class="photo-placeholder"
+            />
+            <p id="text-summary">
+              Цілеспрямована QA спеціалістка з аналітичним мисленням. Маю досвід
+              розробки тестової документації, пошуку та локалізації дефектів.
+              Орієнтована на якість продукту.
             </p>
+            <div class="social-links">
+              <a href="https://linkedin.com/in/kbranwen" target="_blank"
+                ><i class="fa-brands fa-linkedin"></i> LinkedIn
+              </a>
+              <a href="https://github.com/kbranwen" target="_blank">
+                <i class="fa-brands fa-github"></i> GitHub</a
+              >
+              <a href="https://t.me/kbrnwn" target="_blank"
+                ><i class="fa-brands fa-telegram"></i> Telegram</a
+              >
+              <a href="https://viber.click/380991911971" class="social-btn"
+                ><i class="fa-brands fa-viber"></i> Viber
+              </a>
+              <a
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=mailto:41mr.evans@gmail.com"
+                target="_blank"
+                class="social-btn"
+                ><i class="fa-solid fa-envelope"></i> Email</a
+              >
+              <a href="tel:+380991911971" class="social-btn"
+                ><i class="fa-solid fa-phone"></i> +380 99 XXX 19 71
+              </a>
+            </div>
           </div>
-        </div>
+          <section id="skills" class="card">
+            <h3 class="card-title" id="title-skills">
+              🛠 ТЕХНІЧНІ НАВИЧКИ (HARD SKILLS)
+            </h3>
+            <div class="skills-category">
+              <h4>Види тестування & Методології</h4>
+              <div class="skills-tags">
+                <span class="skill-badge">SDLC / STLC</span>
+                <span class="skill-badge">Functional Testing</span>
+                <span class="skill-badge">Regression & Smoke</span>
+                <span class="skill-badge">UI/UX & Cross-browser</span>
+                <span class="skill-badge">API Testing (REST)</span>
+                <span class="skill-badge">Agile / Scrum</span>
+              </div>
+            </div>
+
+            <div class="skills-category">
+              <h4>Тест-дизайн & Документація</h4>
+              <div class="skills-tags">
+                <span class="skill-badge">BVA & EP</span>
+                <span class="skill-badge">Decision Tables</span>
+                <span class="skill-badge">Test Cases & Checklists</span>
+                <span class="skill-badge">Bug Reporting</span>
+                <span class="skill-badge">Test Strategy</span>
+              </div>
+            </div>
+
+            <div class="skills-category">
+              <h4>Інструменти & Технології</h4>
+              <div class="skills-tags">
+                <span class="skill-badge"
+                  ><i class="fa-brands fa-chrome"></i> Chrome DevTools</span
+                >
+                <span class="skill-badge">Postman / Swagger</span>
+                <span class="skill-badge"
+                  ><i class="fa-brands fa-github"></i> Git & GitHub</span
+                >
+                <span class="skill-badge"
+                  ><i class="fa-brands fa-html5"></i> HTML5 / CSS3</span
+                >
+                <span class="skill-badge"
+                  ><i class="fa-solid fa-database"></i> SQL
+                  (Queries/JOINs)</span
+                >
+                <span class="skill-badge"
+                  ><i class="fa-brands fa-jira"></i> Jira / TestRail</span
+                >
+              </div>
+            </div>
+            <div class="grid-row">
+              <section id="education" class="card">
+                <h3 class="card-title" id="title-education">
+                  🎓 ОСВІТА (EDUCATION)
+                </h3>
+                <div class="card-content">
+                  <ul class="info-list">
+                    <li>
+                      <strong
+                        >Binary Studio Academy (Summer 2026 - ongoing)</strong
+                      >
+                      <p id="edu-academy-desc">
+                        Курс: Manual Quality Assurance
+                      </p>
+                    </li>
+                    <li>
+                      <strong>GoIT (Winter 2026)</strong>
+                      <a
+                        href="https://drive.google.com/file/d/1ZXa2bWF3RjHOgnS-0WFv0LBHWzVubXmu/view?usp=drive_link"
+                        target="_blank"
+                        class="cert-link"
+                        id="edu-academy-desc"
+                      >
+                        <p>Курс: Manual Quality Assurance</p>
+                      </a>
+                    </li>
+                    <li>
+                      <strong>Prometheus (Winter 2026)</strong>
+                      <a
+                        href="https://drive.google.com/file/d/1GSDepPTEIdMU7ICJrH7Ffy7xMbIh2C-i/view?usp=drive_link"
+                        target="_blank"
+                        class="cert-link"
+                        id="edu-academy-desc"
+                      >
+                        <p>Курс: Manual Quality Assurance</p>
+                      </a>
+                    </li>
+                    <li>
+                      <strong>Національна академія внутрішніх справ</strong>
+                      <p id="edu-academy-desc">Правознавство</p>
+                    </li>
+                  </ul>
+                </div>
+              </section>
+
+              <section id="languages" class="card">
+                <h3 class="card-title" id="title-languages">
+                  🌐 ВОЛОДІННЯ МОВАМИ (LANGUAGES)
+                </h3>
+                <div class="card-content">
+                  <ul class="info-list">
+                    <li>Українська — Вільне володіння</li>
+                    <li>
+                      Англійська —
+                      <a
+                        href="https://drive.google.com/file/d/1MqNkdqKycZeAbEdlZQLh9aVu-sgQFD1w/view?usp=drive_link"
+                        target="_blank"
+                        class="cert-link"
+                        id="lang-eng-level"
+                        >B1 - Intermediate</a
+                      >
+                    </li>
+                    <p>
+                      <strong
+                        ><a
+                          href="https://greenforest.com.ua/"
+                          target="_blank"
+                          class="cert-link"
+                          id="lang-eng-level"
+                          >Green Forest - онлайн-школа англійської</a
+                        ></strong
+                      >
+                    </p>
+                  </ul>
+                </div>
+              </section>
+            </div>
+            <section id="projects" class="card full-width">
+              <h3 class="card-title" id="title-projects">
+                💼 ПРАКТИЧНИЙ ДОСВІД & ПРОЄКТИ
+              </h3>
+              <div class="card-content">
+                <ul class="projects-list">
+                  <li>
+                    <strong id="proj-1-title"
+                      >Навчальний проєкт: Тестування та пошук дефектів у
+                      веб-додатках.</strong
+                    >
+                    <p id="proj-1-desc">
+                      Проєктування тест-кейcів, чек-листів, ведення тестової
+                      документації. Локалізація та оформлення баг-репортів у
+                      трекінгових системах.
+                    </p>
+                  </li>
+                  <li>
+                    <strong id="proj-2-title"
+                      >Додатковий pet-проєкт: Практика управління проєктами та
+                      задачами на GitHub.</strong
+                    >
+                    <p id="proj-2-desc">
+                      Створення Issues, робота з Kanban-board,
+                      Milestone-планування.
+                      <a href="#" class="project-link"
+                        >https://github.com/kbranwen</a
+                      >
+                    </p>
+                  </li>
+                </ul>
+              </div>
+              <footer class="resume-footer">
+                <a href="#" id="btn-pdf" class="footer-btn btn-secondary"
+                  >📄 Завантажити CV (PDF)</a
+                >
+                <a href="#" id="btn-contact" class="footer-btn btn-secondary"
+                  >💬 Зв'язатися в Telegram</a
+                >
+                <button
+                  id="btn-destroy"
+                  class="footer-btn btn-danger"
+                  onclick="destroyEvidence()"
+                >
+                  ⚠️ ЗНИЩИТИ ДОКАЗИ
+                </button>
+              </footer>
+            </section>
+          </section>
+        </section>
       </div>
-      <a href="" rel="author" class="contact-info__item">
-        <div class="contact-info__item-icon-wrapper">
-          <svg
-            class="contact-info__item-icon"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 384 512"
-          >
-            <path
-              d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192
-        0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535
-        13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817
-        80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z"
-            ></path>
-          </svg>
-        </div>
-        <span>Lviv, Ukraine</span>
-      </a>
-      <a
-        href="https://ua.linkedin.com/company/binary-studio_241166"
-        rel="author"
-        class="contact-info__item"
-      >
-        <div class="contact-info__item-icon-wrapper">
-          <svg
-            class="contact-info__item-icon"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 448 512"
-          >
-            <path
-              d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9
-        480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4
-        416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96
-        102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1
-        243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9
-        54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2
-        0 79.7 44.3 79.7 101.9V416z"
-            ></path>
-          </svg>
-        </div>
-        <span>binary-studio</span>
-      </a>
     </main>
-    <div class="container">
-      <div class="resume__block">
-        <div class="skills">
-          <h3 class="skills__header">Skills</h3>
-          <p class="skills__text">
-            Problem solving, Continuous Learning, Team Collaboration
-          </p>
-        </div>
-      </div>
-    </div>
-    <div class="container">
-      <div class="resume__block">
-        <div class="main-info fh">
-          <div class="experiences"></div>
-
-          <div class="additional-info fv"></div>
-        </div>
-      </div>
-    </div>
-    <h3 class="experiences__header">Experience</h3>
-    <div class="experiences__company">
-      <div class="experiences__company-header">
-        <span class="experiences__company-header-durability">2005-Present</span>
-        <h3 class="experiences__company-header-name">Binary Studio</h3>
-      </div>
-
-      <div class="experiences__company-project">
-        <span class="experiences__company-project-role"
-          >Full-Stack Developer</span
-        >
-        <h3 class="experiences__company-project-name">Hooman project</h3>
-        <ul class="experiences__company-project-responsibilities">
-          <li>Backend Architecture</li>
-          <li>Frontend Development</li>
-          <li>API Integration</li>
-          <li>Code Maintenance</li>
-        </ul>
-      </div>
-    </div>
-    <div class="additional-info fv">
-      <div class="additional-info__education">
-        <h3 class="additional-info__education-header">Education</h3>
-        <div class="additional-info__education-university">
-          <span class="additional-info__education-university-durability"
-            >2021</span
-          >
-          <h3 class="additional-info__education-university-speciality">
-            Full-Stack Development
-          </h3>
-          <p class="additional-info__education-university-name">
-            Binary Studio Academy
-          </p>
-        </div>
-      </div>
-
-      <div class="additional-info__languages">
-        <h3 class="additional-info__languages-header">Languages</h3>
-        <p class="additional-info__languages-item">English</p>
-        <p class="additional-info__languages-item">Ukrainian</p>
-      </div>
-    </div>
+    <script src="scripts.js"></script>
   </body>
 </html>

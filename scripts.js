@@ -1,6 +1,31 @@
-// 🌧️ 1. Глобальна змінна для таймера дощу (ОБОВ'ЯЗКОВО НА ПОЧАТКУ ФАЙЛУ!)
+// ==========================================
+// 1. КОНСОЛЬНЕ ПОВІДОМЛЕННЯ ДЛЯ РЕКРУТЕРІВ / QA
+// ==========================================
+console.log(
+  "%c STOP right there! 🛑 \n%c You are entering a RESTRICTED AREA. \nAll activities are monitored by QA Department.", 
+  "color: #ff4d4d; font-size: 20px; font-weight: bold;", 
+  "color: #00d4ff; font-size: 14px;"
+);
+
+// ==========================================
+// 2. ГЛОБАЛЬНІ ЗМІННІ ТА АУДІО
+// ==========================================
 let rainInterval = null;
-// 🕵️‍♂️ Логіка завантаження POLICE DATABASE
+let photoClickCount = 0;
+let photoClickTimer = null;
+const doakesAudio = new Audio("assets/james-doakes.mp3");
+
+// ==========================================
+// 3. ІНІЦІАЛІЗАЦІЯ ПІСЛЯ ЗАВАНТАЖЕННЯ DOM
+// ==========================================
+document.addEventListener("DOMContentLoaded", () => {
+  runInitialLoader();
+  initDoakesEasterEgg();
+});
+
+// ==========================================
+// 4. ЛОГІКА ЗАВАНТАЖЕННЯ POLICE DATABASE (LOADER)
+// ==========================================
 function runInitialLoader() {
   const overlay = document.getElementById("loader-overlay");
   const fill = document.getElementById("progress-fill");
@@ -12,40 +37,33 @@ function runInitialLoader() {
   let progress = 0;
 
   const interval = setInterval(() => {
-    // Пришвидшуємо прогрес випадковими кроками для реалістичності
     progress += Math.floor(Math.random() * 2) + 3;
 
     if (progress >= 100) {
       progress = 100;
       clearInterval(interval);
 
-      // Фінальний статус перед зниканням
       if (statusText) statusText.innerText = "ACCESS GRANTED.";
 
-      // Затримка 400ms на 100%, потім плавно ховаємо
       setTimeout(() => {
         overlay.classList.add("hidden");
       }, 600);
     }
 
-    // Зміна тексту статусу по ходу завантаження
     if (progress > 30 && progress < 70) {
       if (statusText) statusText.innerText = "Checking permissions...";
     } else if (progress >= 70 && progress < 100) {
       if (statusText) statusText.innerText = "Loading investigation...";
     }
 
-    // Оновлюємо ширину смуги та відсотки
     if (fill) fill.style.width = progress + "%";
     if (percentText) percentText.innerText = progress + "%";
-  }, 60); // Швидкість заповнення (усього ~1.5 - 2 секунди)
+  }, 60);
 }
 
-// Запускаємо лоадер одразу після завантаження DOM
-document.addEventListener("DOMContentLoaded", () => {
-  runInitialLoader();
-});
-// 📸 2. Функція створення однієї краплі
+// ==========================================
+// 5. ЕФЕКТ ДОЩУ (DETECTIVE MODE)
+// ==========================================
 function createRainDrop() {
   if (!document.body.classList.contains("detective-mode")) return;
 
@@ -64,95 +82,95 @@ function createRainDrop() {
   }, duration * 1000);
 }
 
-// 🔄 3. Перемикач режимів
+function stopRain() {
+  if (rainInterval) {
+    clearInterval(rainInterval);
+    rainInterval = null;
+  }
+  document.querySelectorAll(".rain-drops").forEach((drop) => drop.remove());
+}
+
+// ==========================================
+// 6. ПЕРЕМИКАЧ РЕЖИМІВ (HR vs DETECTIVE)
+// ==========================================
 function toggleMode() {
   document.body.classList.toggle("detective-mode");
 
   const isDetective = document.body.classList.contains("detective-mode");
 
-  // 🌧️ Вмикаємо/Вимикаємо дощ
+  // 🌧️ Керування дощем
   if (isDetective) {
     if (!rainInterval) {
       rainInterval = setInterval(createRainDrop, 40);
     }
   } else {
-    clearInterval(rainInterval);
-    rainInterval = null;
-    document.querySelectorAll(".rain-drops").forEach(drop => drop.remove());
+    stopRain();
   }
 
   // 📸 Зміна фотографії
-  const photo = document.getElementById("user-photo");
-  if (photo) {
-    photo.src = isDetective ? "assets/avatar-detective.jpg" : "assets/avatar.jpg";
-  }
+const photo = document.getElementById("user-photo");
+if (photo) {
+  photo.src = isDetective ? "assets/avatar-detective.jpg" : "assets/avatar.jpg";
+  
+  // 🕵️‍♀️ Підказка для пасхалки при наведенні
+  photo.title = isDetective 
+    ? "🔍 ПОДОЗРЮВАНИЙ: Допитати (3 швидкі кліки)" 
+    : "Tetiana Tolkachova";
+}
 
-    // 📄 🔒 ПІДМІНА ФАЙЛУ ЗАВАНТАЖЕННЯ (HR vs SCP)
-const pdfBtn = document.getElementById("btn-pdf");
+  // 📄 🔒 Підміна файлу завантаження (HR vs SCP)
+  const pdfBtn = document.getElementById("btn-pdf");
   if (pdfBtn) {
     if (isDetective) {
       pdfBtn.setAttribute("href", "assets/Clasified-resume.pdf");
       pdfBtn.setAttribute("download", "Clasified_resume_RESTRICTED.pdf");
-      pdfBtn.innerText = "🛑 [CLASSIFIED] SCP DOSSIER (PDF)";
+      pdfBtn.innerText = "🛑 [CLASSIFIED] DOSSIER (PDF)";
     } else {
       pdfBtn.setAttribute("href", "assets/Resume.pdf");
       pdfBtn.setAttribute("download", "CV_QA_Engineer.pdf");
       pdfBtn.innerText = "📄 Завантажити CV (PDF)";
     }
   }
-    
-  document.getElementById("user-name").innerText = isDetective
-    ? "ДОСЬЄ №028 // CLASSIFIED"
-    : "Tetiana Tolkachova";
-  document.getElementById("page-title").innerText = isDetective
-    ? "🔎 МАТЕРІАЛИ РОЗСЛІДУВАННЯ: BUG HUNTER"
-    : "JUNIOR MANUAL QA ENGINEER";
 
-  document.getElementById("section-main-title").innerText = isDetective
-    ? "🕵️‍♀️ МАТЕРІАЛИ СПРАВИ: ПОШУК ТА ЛІКВІДАЦІЯ БАГІВ"
-    : "📌 РЕЗЮМЕ / ПРОФЕСІЙНИЙ ПРОФІЛЬ";
-  document.getElementById("title-summary").innerText = isDetective
-    ? "📁 ОСОБОВА СПРАВА ПІДОЗРЮВАНОГО"
-    : "👤 ІНФОРМАЦІЯ ПРО МЕНЕ";
-  document.getElementById("text-summary").innerText = isDetective
-    ? "Ціль: Впровадитися в IT-сектор, зламати опір багів та вивести якість софту на чисту воду. Надійна, уважна до найдрібніших деталей, стійка до стрес-тестів."
-    : "Цілеспрямована QA спеціалістка з аналітичним мисленням. Маю досвід розробки тестової документації, пошуку та локалізації дефектів. Орієнтована на якість продукту.";
+  // 💬 Кнопка контакту
+  const contactBtn = document.getElementById("btn-contact");
+  if (contactBtn) {
+    contactBtn.innerText = isDetective
+      ? "🔐 Секретна папка / BUGS"
+      : "💬 Зв'язатися в Telegram";
+  }
 
-  document.getElementById("title-skills").innerText = isDetective
-    ? "🗂 РЕЧОВІ ДОКАЗИ (HARD SKILLS)"
-    : "🛠 ТЕХНІЧНІ НАВИЧКИ (HARD SKILLS)";
-  document.getElementById("title-education").innerText = isDetective
-    ? "📂 СПЕЦПІДГОТОВКА (EDUCATION)"
-    : "🎓 ОСВІТА (EDUCATION)";
-  document.getElementById("edu-academy-desc").innerText = isDetective
-    ? "Спеціалізація: Manual QA."
-    : "Курс: Manual Quality Assurance";
+// 📝 Текстові блоки (Концепція: Небезпечний Bug-Злочинець)
+  updateText("user-name", isDetective ? "ДОСЬЄ №028 // MOST WANTED" : "Tetiana Tolkachova");
+  updateText("page-title", isDetective ? "🔎 ОРІЄНТУВАННЯ: BUG HUNTER" : "JUNIOR MANUAL QA ENGINEER");
+  updateText("section-main-title", isDetective ? "🕵️‍♀️ МАТЕРІАЛИ СПРАВИ: ОСОБЛИВО НЕБЕЗПЕЧНА" : "📌 РЕЗЮМЕ / ПРОФЕСІЙНИЙ ПРОФІЛЬ");
+  updateText("title-summary", isDetective ? "📁 ОСОБОВА СПРАВА ПІДОЗРЮВАНОЇ" : "👤 ІНФОРМАЦІЯ ПРО МЕНЕ");
+  updateText("text-summary", isDetective 
+    ? "Орієнтування: Звинувачується у масовому викритті критичних дефектів, нещадному зломі бізнес-логіки та зламі стрес-тестів. При виявленні на продакшені — негайно затримати та працевлаштувати."
+    : "Цілеспрямована QA спеціалістка з аналітичним мисленням. Маю досвід розробки тестової документації, пошуку та локалізації дефектів. Орієнтована на якість продукту.");
 
-  document.getElementById("title-languages").innerText = isDetective
-    ? "🗣 ШИФРУВАННЯ (LANGUAGES)"
-    : "🌐 ВОЛОДІННЯ МОВАМИ (LANGUAGES)";
-  document.getElementById("lang-eng-level").innerText = isDetective
-    ? "B1 - Intermediate (Дешифрування без словника)"
-    : "B1 - Intermediate";
-
-  document.getElementById("title-projects").innerText = isDetective
-    ? "🗃 АРХІВ ЗАКРИТИХ СПРАВ (ПРОЄКТИ & ПРАКТИКА)"
-    : "💼 ПРАКТИЧНИЙ ДОСВІД & ПРОЄКТИ";
-
-  document.getElementById("btn-pdf").innerText = isDetective
-    ? "📄 Скачати PDF"
-    : "📄 Завантажити CV (PDF)";
-  document.getElementById("btn-contact").innerText = isDetective
-    ? "🔐 Секретна папка / BUGS"
-    : "💬 Зв'язатися в Telegram";
+  updateText("title-skills", isDetective ? "🗂 РЕЧОВІ ДОКАЗИ (HARD SKILLS)" : "🛠 ТЕХНІЧНІ НАВИЧКИ (HARD SKILLS)");
+  updateText("title-education", isDetective ? "📂 СПЕЦПІДГОТОВКА (EDUCATION)" : "🎓 ОСВІТА (EDUCATION)");
+  updateText("edu-academy-desc", isDetective ? "Спеціалізація: Manual QA." : "Курс: Manual Quality Assurance");
+  updateText("title-languages", isDetective ? "🗣 КАНАЛИ ЗВ'ЯЗКУ (LANGUAGES)" : "🌐 ВОЛОДІННЯ МОВАМИ (LANGUAGES)");
+  updateText("lang-eng-level", isDetective ? "B1 - Intermediate (обочий рівень для міжнародного розшуку)" : "B1 - Intermediate");
+  updateText("title-projects", isDetective ? "🗃 МІСЦЯ ЗЛОЧИНУ (ПРОЄКТИ & ПРАКТИКА)" : "💼 ПРАКТИЧНИЙ ДОСВІД & ПРОЄКТИ");
 }
 
-// 2. Синій екран смерті (BSOD) для секретної папки
+// Допоміжна функція для безпечного оновлення тексту
+function updateText(id, text) {
+  const el = document.getElementById(id);
+  if (el) el.innerText = text;
+}
+
+// ==========================================
+// 7. СИНІЙ ЕКРАН СМЕРТІ (BSOD)
+// ==========================================
 function handleContactClick(event) {
   const isDetective = document.body.classList.contains("detective-mode");
 
   if (isDetective) {
-    event.preventDefault(); // Зупиняємо звичайний перехід
+    event.preventDefault();
 
     const bsod = document.createElement("div");
     bsod.className = "bsod-overlay";
@@ -173,31 +191,42 @@ function handleContactClick(event) {
     const percentElement = document.getElementById("bsod-percent");
 
     const interval = setInterval(() => {
-      percent += Math.floor(Math.random() * 5) + 1; 
+      percent += Math.floor(Math.random() * 5) + 1;
 
       if (percent >= 100) {
         percent = 100;
-        percentElement.innerText = "100%";
+        if (percentElement) percentElement.innerText = "100%";
         clearInterval(interval);
 
         setTimeout(() => {
           bsod.remove();
           window.open("https://t.me/kbrnwn", "_blank");
         }, 1500);
-
       } else {
-        percentElement.innerText = `${percent}%`;
+        if (percentElement) percentElement.innerText = `${percent}%`;
       }
     }, 180);
   }
 }
 
- 
-// 3. Знищення доказів (Величезний світло-сірий заголовок)
+// ==========================================
+// 8. ЗНИЩЕННЯ ДОКАЗІВ
+// ==========================================
 function destroyEvidence() {
-    if (confirm("Ви впевнені, що хочете видалити всі докази?")) {
-        if (confirm("Рекрутери не зможуть вас знайти! Точно видалити?")) {
-            document.body.innerHTML = `
+  if (confirm("Ви впевнені, що хочете видалити всі докази?")) {
+    if (confirm("Рекрутери не зможуть вас знайти! Точно видалити?")) {
+      
+      // 1. Зупиняємо дощ
+      stopRain();
+
+      // 2. Скидаємо стилі Detective Mode
+      document.body.classList.remove("detective-mode");
+      document.body.style.backgroundColor = "#ffffff";
+      document.body.style.margin = "0";
+      document.body.style.padding = "0";
+
+      // 3. Замінюємо сторінку на чистий білий екран з повідомленням
+      document.body.innerHTML = `
         <div style="
           background: #ffffff; 
           height: 100vh; 
@@ -211,7 +240,6 @@ function destroyEvidence() {
           box-sizing: border-box;
           overflow: hidden;
         ">
-          <!-- Чіткий і яскравий заголовок -->
           <h1 style="
             color: #1e293b; 
             font-size: clamp(2rem, 8vw, 6rem); 
@@ -226,7 +254,6 @@ function destroyEvidence() {
             💥 СПРАВУ ЗНИЩЕНО!
           </h1>
 
-          <!-- "Напівпрозора" світло-сіра кнопка відновлення -->
           <a href="index.html" style="
             font-size: 1.1rem; 
             color: #cbd5e1; 
@@ -239,43 +266,43 @@ function destroyEvidence() {
           " onmouseover="this.style.borderColor='#007bff'; this.style.color='#007bff';" onmouseout="this.style.borderColor='#e2e8f0'; this.style.color='#cbd5e1';">
             [ ВІДНОВИТИ З БЕКАПУ ]
           </a>
-        </div>
+        </div> 
       `;
-        }
-        // Змінна для збереження інтервалу дощу
-        let rainInterval = null;
-
-        // Функція генерації однієї краплі
-        function createRainDrop() {
-            // Дощ йде тільки якщо включений Detective Mode
-            if (!document.body.classList.contains("detective-mode")) return;
-
-            const drop = document.createElement("span");
-            drop.classList.add("rain-drops");
-
-            // Випадкова позиція по ширині екрана (від 0% до 100%)
-            drop.style.left = Math.random() * window.innerWidth + "px";
-
-            // Випадкова тривалість падіння (від 0.7s до 1.3s) для реалістичності
-            const duration = Math.random() * 0.6 + 0.7;
-            drop.style.animationDuration = duration + "s";
-
-            document.body.appendChild(drop);
-
-            // Видаляємо краплю після завершення анімації
-            setTimeout(() => {
-                drop.remove();
-            }, duration * 1000);
-        }
     }
-    // 🔦 1. Функція перемикання ліхтарика
-    function toggleTorch() {
-        document.body.classList.toggle("torch-active");
-        const isTorchOn = document.body.classList.contains("torch-active");
-  
-        const torchBtn = document.getElementById("btn-torch");
-        if (torchBtn) {
-            torchBtn.innerText = isTorchOn ? "💡 Вимкнути ліхтарик" : "🔦 Увімкнути ліхтарик";
-        }
-    }
+  }
+}
+
+// ==========================================
+// 9. ПАСХАЛКА DOAKES ("SURPRISE!")
+// ==========================================
+function initDoakesEasterEgg() {
+  const photo = document.getElementById("user-photo");
+
+  if (photo) {
+    photo.addEventListener("click", () => {
+      if (!document.body.classList.contains("detective-mode")) return;
+
+      photoClickCount++;
+
+      clearTimeout(photoClickTimer);
+      photoClickTimer = setTimeout(() => {
+        photoClickCount = 0;
+      }, 800);
+
+      if (photoClickCount === 3) {
+        photoClickCount = 0;
+
+        doakesAudio.currentTime = 0;
+        doakesAudio.play().catch((err) => console.log("Audio play blocked:", err));
+
+        photo.style.transform = "scale(1.08) rotate(3deg)";
+        photo.style.filter = "brightness(1.3) contrast(1.2)";
+
+        setTimeout(() => {
+          photo.style.transform = "";
+          photo.style.filter = "";
+        }, 600);
+      }
+    });
+  }
 }

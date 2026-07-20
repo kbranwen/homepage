@@ -487,6 +487,13 @@ body.detective-mode .photo-placeholder {
     background: #1a1612;
     color: #ff3333;
     border-radius: 0px;
+    cursor: pointer;
+        transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+body.detective-mode #user-photo:hover {
+    transform: scale(1.02);
+    filter: brightness(1.1);
 }
 
 body.detective-mode .card-content a {

@@ -157,7 +157,7 @@ if (photo) {
   updateText("title-education", isDetective ? "📂 СПЕЦПІДГОТОВКА (EDUCATION)" : "🎓 ОСВІТА (EDUCATION)");
   updateText("edu-academy-desc", isDetective ? "Спеціалізація: Manual QA." : "Курс: Manual Quality Assurance");
   updateText("title-languages", isDetective ? "🗣 КАНАЛИ ЗВ'ЯЗКУ (LANGUAGES)" : "🌐 ВОЛОДІННЯ МОВАМИ (LANGUAGES)");
-  updateText("lang-eng-level", isDetective ? "B1 - Intermediate (обочий рівень для міжнародного розшуку)" : "B1 - Intermediate");
+  updateText("lang-eng-level", isDetective ? "B1 - Intermediate (робочий рівень для міжнародного розшуку)" : "B1 - Intermediate");
   updateText("title-projects", isDetective ? "🗃 МІСЦЯ ЗЛОЧИНУ (ПРОЄКТИ & ПРАКТИКА)" : "💼 ПРАКТИЧНИЙ ДОСВІД & ПРОЄКТИ");
 }
 
